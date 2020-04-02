@@ -21,8 +21,8 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "au.edu.unsw.infs3634.beers.MESSAGE";
-    private boolean wideMode;
+    public static final String EXTRA_MESSAGE = "au.edu.unsw.infs3634.beers";
+    private boolean bigScreen;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -37,18 +37,18 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        wideMode = setWideMode(); //Sets boolean value based on whether device has a certain element
+        bigScreen = setBigScreen(); //Sets true or false depending on whether there is a detail_container
 
         CoinAdapter.RecyclerViewClickListener listener = new CoinAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                if (wideMode) {
+                if (bigScreen) {
                     //Refer to tutorial slides
                     FragmentManager myManager = getSupportFragmentManager();
                     FragmentTransaction myTransaction = myManager.beginTransaction();
                     Fragment myFragment = new DetailFragment();
                     Bundle arguments = new Bundle();
-                    arguments.putInt("POSITION", position);
+                    arguments.putInt("pos", position);
                     myFragment.setArguments(arguments);
                     myTransaction.replace(R.id.detailContainer, myFragment);
                     myTransaction.commit();
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private boolean setWideMode() {
+    private boolean setBigScreen() {
         if(findViewById(R.id.detailContainer)  ==  null) {
             return false;
         }

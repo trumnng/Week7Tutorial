@@ -22,7 +22,7 @@ public class DetailActivity extends AppCompatActivity {
         FragmentTransaction myTransaction = myManager.beginTransaction();
         Fragment myFragment = new DetailFragment();
         Bundle arguments = new Bundle();
-        arguments.putInt("POSITION", position);
+        arguments.putInt("pos", position);
         myFragment.setArguments(arguments);
         myTransaction.replace(R.id.scrollView2, myFragment);
         myTransaction.commit();

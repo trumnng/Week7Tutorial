@@ -43,7 +43,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         Bundle arguments = getArguments();
-        int position = arguments.getInt("POSITION");
+        int position = arguments.getInt("pos");
 
         Gson gson = new Gson();
         CoinLoreResponse response = gson.fromJson(CoinLoreResponse.json, CoinLoreResponse.class);

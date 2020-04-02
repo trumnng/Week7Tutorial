@@ -7,53 +7,53 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.example.week7tutorial.Entities.Coin;
-import com.example.week7tutorial.Entities.Coin;
+
 
 public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.CoinViewHolder> {
     private List<Coin> mCoins;
     private RecyclerViewClickListener mListener;
 
 
-    //CoinAdapter Constructor
+//Create a Coin Constructor for the Adapter
     public CoinAdapter(List<Coin> coins, RecyclerViewClickListener listener) {
         mCoins = coins;
         mListener = listener;
     }
 
 
-    //Creates an interface template
+//Initialise the interface
     public interface RecyclerViewClickListener {
         void onClick(View view, int position);
     }
 
 
-    //Creates a CoinViewHolder class that can be invoked without CoinAdapter class
+//Create a CoinViewHolder to be used
     public static class CoinViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name, value, change;
         private RecyclerViewClickListener mListener;
-
-        //Constructor for CoinViewHolder
-        public CoinViewHolder(View v, RecyclerViewClickListener listener) {
-            super(v);
+        // Create Constructor for CoinViewHolder
+        public CoinViewHolder(View view, RecyclerViewClickListener listener) {
+            super(view);
             mListener = listener;
-            v.setOnClickListener(this);
-            name = v.findViewById(R.id.tvName);
-            value = v.findViewById(R.id.tvValue);
-            change = v.findViewById(R.id.tvChange);
+            view.setOnClickListener(this);
+            name = view.findViewById(R.id.tvName);
+            value = view.findViewById(R.id.tvValue);
+            change = view.findViewById(R.id.tvChange);
         }
 
-        //onClick method from RecyclerViewClickListener interface
+        //onClick Method for the interface
         @Override
-        public void onClick(View view) { mListener.onClick(view, getAdapterPosition()); }
+        public void onClick(View view) {
+            mListener.onClick(view, getAdapterPosition());
+        }
     }
 
 
-    //Creates CoinViewHolder (layout object) and sets it
+    //Create CoinViewHolder ready for binding
     @Override
     public CoinAdapter.CoinViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.coin_list_row, parent, false);
@@ -61,7 +61,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.CoinViewHolder
     }
 
 
-    //Sets text for TextView elements
+    //Bind elements to CoinViewHolder from CoinAdapter
     @Override
     public void onBindViewHolder(CoinViewHolder holder, int position) {
         Coin coin = mCoins.get(position);
@@ -71,8 +71,10 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.CoinViewHolder
     }
 
 
-    //Needed for RecyclerView
+    //Necessary RecyclerView component
     @Override
-    public int getItemCount() { return mCoins.size(); }
+    public int getItemCount() {
+        return mCoins.size();
+    }
 }
 
